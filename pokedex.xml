@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pokedex xmlns="http://www.pocketmonsters.be/pokedex"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.pocketmonsters.be/pokedex pokedex.xsd">
+    <pokemon dexNr="1">
+        <name>Bulbasaur</name>
+        <types>
+            <type name="grass"/>
+            <type name="poison"/>   
+        </types>
+    </pokemon>
+    <pokemon dexNr="2">
+        <name>Ivysaur</name>
+        <types>
+            <type name="grass"/>
+            <type name="poison"/>   
+        </types>
+    </pokemon>
+    <pokemon dexNr="3">
+        <name>Venusaur</name>
+        <types>
+            <type name="grass"/>
+            <type name="poison"/>   
+        </types>
+    </pokemon>
+</pokedex>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:pkmn="http://www.pocketmonsters.be/pokedex"
+           targetNamespace="http://www.pocketmonsters.be/pokedex"
+           elementFormDefault="qualified">
+    
+    <xs:complexType name="Type">
+        <xs:attribute name="name">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="grass"/>
+                    <xs:enumeration value="fire"/>
+                    <xs:enumeration value="water"/>
+                    <xs:enumeration value="electric"/>
+                    <xs:enumeration value="psychic"/>
+                    <xs:enumeration value="ice"/>
+                    <xs:enumeration value="dragon"/>
+                    <xs:enumeration value="dark"/>
+                    <xs:enumeration value="fairy"/>
+                    <xs:enumeration value="steel"/>
+                    <xs:enumeration value="ghost"/>
+                    <xs:enumeration value="bug"/>
+                    <xs:enumeration value="rock"/>
+                    <xs:enumeration value="poison"/>
+                    <xs:enumeration value="flying"/>
+                    <xs:enumeration value="fighting"/>
+                    <xs:enumeration value="normal"/>
+                    <xs:enumeration value="???"/>
+                </xs:restriction> 
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Types">
+        <xs:sequence>
+            <xs:element name="type" type="pkmn:Type" maxOccurs="2"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Pokemon">
+        <xs:sequence>
+            <xs:element name="name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[A-Z]{1}[a-z]+(-[A-Z]|')?[a-z]*"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="types" type="pkmn:Types">
+                <xs:key name="typeKey">
+                    <xs:selector xpath="type"/>
+                    <xs:field xpath="@name"/>
+                </xs:key>
+            </xs:element> 
+        </xs:sequence>
+        <xs:attribute name="dexNr" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:positiveInteger">
+                    <xs:maxInclusive value="802"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="Pokedex">
+        <xs:sequence>
+            <xs:element name="pokemon" type="pkmn:Pokemon" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+     
+    <xs:element name="pokedex" type="pkmn:Pokedex">
+        <xs:key name="dexNrKey">
+            <xs:selector xpath="pkmn:pokemon"/>
+            <xs:field xpath="@dexNr"/>
+        </xs:key>
+    </xs:element>
+    
+</xs:schema>
